@@ -1,10 +1,5 @@
 import Vue from 'vue';
 import App from './App.vue';
-import store from './store';
-
-import VueSkycons from 'vue-skycons';
-Vue.use(VueSkycons);
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 Vue.config.productionTip = false;
