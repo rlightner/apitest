@@ -21,8 +21,8 @@ export default new Vuex.Store({
   actions: {
     getLatLng(context, search) {
       //https://api.geocod.io/v1.3/geocode?api_key={key}&q={search}
-
-      let url = `https://api.geocod.io/v1.3/geocode?api_key=877a677baa457cb6357dbba8232442aa52536cc&q=${search}`;
+      
+      let url = `https://api.geocod.io/v1.3/geocode?api_key=${process.env.VUE_APP_GEOCODIO_API}&q=${search}`;
 
       return fetch(url)
         .then(function (response) {
@@ -38,7 +38,7 @@ export default new Vuex.Store({
       lng
     }) {
       //https://api.darksky.net/forecast/{key}}/{lat},{lng}
-      return fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/9214fe4b4654080047d5ef31851ed4c8/${lat},${lng}`)
+      return fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${process.env.VUE_APP_DARKSKY_API}/${lat},${lng}`)
         .then(function (response) {
           return response.json();
         })

@@ -24,9 +24,15 @@
         </div>
         <div class="col-auto">
           <button
-            class="btn btn-primary"
+            class="btn btn-primary mr-2"
             type="submit"
           >Submit</button>
+          |
+          <button
+            @click.prevent="findLocation"
+            class="btn btn-primary ml-2"
+            type="button"
+          >Find Me</button>
         </div>
       </div>
     </form>
@@ -99,6 +105,20 @@ export default {
   methods: {
     getDayOfWeek(date) {
       return moment(date).format("dddd");
+    },
+    findLocation() {
+      this.loading = true;
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log(position)
+        this.$store
+          .dispatch("getWeather", {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          })
+          .then(getWeatherResponse => {
+            this.loading = false;
+          });
+      });
     },
     onSearch(evt) {
       evt.preventDefault();
